@@ -66,7 +66,7 @@ class TransformerBlock(Layer):
         ffn_output = self.dropout2(ffn_output)
         return self.norm2(out1 + ffn_output)
 
-class GPT2(Model):
+class TessiLLM(Model):
     def __init__(self, vocab_size, max_length, embed_dim=768, num_heads=12, dff=3072, num_layers=12, dropout_rate=0.1):
         super().__init__()
 
@@ -102,9 +102,9 @@ VOCAB_SIZE = 50257
 MAX_LENGTH = 1024  
 
 inputs = tf.keras.Input(shape=(MAX_LENGTH,), dtype=tf.int32)
-outputs = GPT2(vocab_size=VOCAB_SIZE, max_length=MAX_LENGTH)(inputs)
-gpt2 = Model(inputs, outputs)
+outputs = TessiLLM(vocab_size=VOCAB_SIZE, max_length=MAX_LENGTH)(inputs)
+tessillm = Model(inputs, outputs)
 
-gpt2.build(input_shape=(1, MAX_LENGTH))
+tessillm.build(input_shape=(1, MAX_LENGTH))
 
-gpt2.summary()
+tessillm.summary()
